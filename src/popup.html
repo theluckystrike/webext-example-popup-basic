@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popup Basic</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      width: 300px;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #fff;
+    }
+    
+    h1 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #333;
+    }
+    
+    p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 16px;
+    }
+    
+    button {
+      background: #4285f4;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    button:hover {
+      background: #3367d6;
+    }
+    
+    button:active {
+      background: #2a5bb8;
+    }
+    
+    #message {
+      margin-top: 12px;
+      padding: 8px;
+      border-radius: 4px;
+      font-size: 13px;
+      display: none;
+    }
+    
+    #message.success {
+      display: block;
+      background: #e6f4ea;
+      color: #1e8e3e;
+    }
+    
+    #counter {
+      font-size: 24px;
+      font-weight: bold;
+      color: #4285f4;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Popup Basic</h1>
+  <p>Click the button to interact with the extension.</p>
+  
+  <div id="counter">0</div>
+  <button id="clickMe">Click Me!</button>
+  
+  <div id="message" class="success"></div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

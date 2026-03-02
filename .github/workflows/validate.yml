@@ -1,0 +1,50 @@
+name: Validate Extension
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Validate manifest.json
+        run: |
+          cat src/manifest.json | python3 -m json.tool > /dev/null
+          echo "✓ manifest.json is valid JSON"
+          
+      - name: Check required fields
+        run: |
+          python3 << 'EOF'
+          import json
+          import sys
+          
+          with open('src/manifest.json') as f:
+              manifest = json.load(f)
+          
+          required = ['manifest_version', 'name', 'version', 'action']
+          for field in required:
+              if field not in manifest:
+                  print(f"✗ Missing required field: {field}")
+                  sys.exit(1)
+          
+          if 'default_popup' not in manifest.get('action', {}):
+              print("✗ Missing default_popup in action")
+              sys.exit(1)
+          
+          print("✓ Action with popup configured")
+          EOF
+          
+      - name: Verify popup files exist
+        run: |
+          if [ -f "src/popup.html" ] && [ -f "src/popup.js" ]; then
+            echo "✓ Popup files present"
+          else
+            echo "✗ Missing popup files"
+            exit 1
+          fi
